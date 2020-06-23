@@ -8,6 +8,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Contatos em Flutter',
       theme: ThemeData(
         primarySwatch: Colors.red,
@@ -32,6 +33,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
+  int _index = 0;
 
   void _incrementCounter() {
     setState(() {
@@ -43,9 +45,37 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
 
     return Scaffold(
+      bottomNavigationBar: BottomNavigationBar(
+        onTap: (int index){
+          setState(() {
+            _index = index;
+          });
+        },
+        currentIndex: _index,
+        items: [
+          BottomNavigationBarItem(
+              icon: Icon(Icons.add),
+              title: Text ('Adicionar contato'),
+              activeIcon: Icon(Icons.add, color: Colors.red)
+          ),
+
+          BottomNavigationBarItem(
+              icon: Icon(Icons.refresh),
+              title: Text ('Atualizar lista'),
+              activeIcon: Icon(Icons.refresh, color: Colors.red)
+          ),
+
+        ],
+      ),
+
+
       appBar: AppBar(
           centerTitle: true,
         title: Text(widget.title),
+        backgroundColor: Colors.redAccent,
+        actions: <Widget>[
+          Icon(Icons.add)
+        ],
       ),
       body: Center(
         child: Column(
